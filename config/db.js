@@ -12,5 +12,7 @@ const db = mysql.createPool({
   database: process.env.DB_NAME,
 });
 
+
+
 // Export de la connexion avec support des promesses
 module.exports = db;

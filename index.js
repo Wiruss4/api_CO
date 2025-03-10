@@ -32,15 +32,23 @@ const fokontany = require('./routes/fokontany');
 const region = require('./routes/region');
 const site_hebergement = require('./routes/site_hebergement');
 const population_data = require('./routes/population_data');
-const localisationStats = require("./routes/localisationStats"); 
+const localisationStats = require("./routes/localisationStats");
+const suiviSiteHebergementRoutes = require("./routes/suivi_site_hebergement");
+const type_site = require ('./routes/type_site');
+const suiviSiteHebergementFullRoutes = require("./routes/suivi_site_hebergement_full");
+
+
 
 app.use('/api/commune', commune);
 app.use('/api/district', district);
 app.use('/api/fokontany', fokontany);
 app.use('/api/region', region);
-app.use('/api/site', site_hebergement);
+app.use('/api/site-hebergement', site_hebergement);
 app.use('/api/population', population_data);
 app.use("/api/localisation-stats", localisationStats);
+app.use("/api/suivi-site-hebergement", suiviSiteHebergementRoutes);
+app.use('/api/type-site', type_site);
+app.use("/api/suivi-site-hebergement-full", suiviSiteHebergementFullRoutes);
 
 // ✅ Middleware pour gérer les erreurs
 app.use((err, req, res, next) => {
