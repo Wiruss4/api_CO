@@ -50,15 +50,36 @@ router.put("/:id", async (req, res) => {
 });
 
 // ✅ Supprimer un site d'hébergement
+// ✅ Supprimer un site d'hébergement
+// ✅ Supprimer un site d'hébergement
 router.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        await db.promise().query("DELETE FROM site_hebergement WHERE id_site = ?", [id]);
-        res.json({ message: "Site d'hébergement supprimé" });
+        console.log("🔹 ID reçu pour suppression :", id); // ✅ Vérifier l'ID reçu
+
+        // Vérifier si l'ID est bien un nombre
+        if (isNaN(id)) {
+            return res.status(400).json({ success: false, message: "ID invalide." });
+        }
+
+        // Vérifier si le site existe avant de supprimer
+        const [site] = await db.promise().query("SELECT * FROM site_hebergement WHERE id_site = ?", [id]);
+
+        if (site.length === 0) {
+            return res.status(404).json({ success: false, message: "Site non trouvé." });
+        }
+
+        // Supprimer le site
+        const [result] = await db.promise().query("DELETE FROM site_hebergement WHERE id_site = ?", [id]);
+
+        console.log("✅ Suppression réussie :", result.affectedRows); // ✅ Vérifier si la suppression a eu lieu
+
+        res.json({ success: true, message: "Site d'hébergement supprimé" });
     } catch (error) {
         console.error("❌ Erreur API site_hebergement :", error);
-        res.status(500).json({ error: "Erreur lors de la suppression du site." });
+        res.status(500).json({ success: false, error: "Erreur lors de la suppression du site." });
     }
 });
+
 
 module.exports = router;
