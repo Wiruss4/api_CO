@@ -36,6 +36,13 @@ const localisationStats = require("./routes/localisationStats");
 const suiviSiteHebergementRoutes = require("./routes/suivi_site_hebergement");
 const type_site = require ('./routes/type_site');
 const suiviSiteHebergementFullRoutes = require("./routes/suivi_site_hebergement_full");
+const secteur = require('./routes/secteur');
+const sousSecteur = require('./routes/sousSecteur');
+const nature = require('./routes/nature');
+const typeBesoin = require('./routes/typeBesoin');
+const besoinSite = require('./routes/besoinSite');
+
+
 
 
 
@@ -49,6 +56,12 @@ app.use("/api/localisation-stats", localisationStats);
 app.use("/api/suivi-site-hebergement", suiviSiteHebergementRoutes);
 app.use('/api/type-site', type_site);
 app.use("/api/suivi-site-hebergement-full", suiviSiteHebergementFullRoutes);
+app.use('/api/secteurs', secteur);
+app.use('/api/sous-secteurs', sousSecteur);
+app.use('/api/natures', nature);
+app.use('/api/types-besoin', typeBesoin);
+app.use('/api/besoins-site', besoinSite);
+
 
 // ✅ Middleware pour gérer les erreurs
 app.use((err, req, res, next) => {
