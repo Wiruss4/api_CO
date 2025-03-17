@@ -41,8 +41,7 @@ const sousSecteur = require('./routes/sousSecteur');
 const nature = require('./routes/nature');
 const typeBesoin = require('./routes/typeBesoin');
 const besoinSite = require('./routes/besoinSite');
-
-
+const statsRoutes = require('./routes/stats');
 
 
 
@@ -61,6 +60,7 @@ app.use('/api/sous-secteurs', sousSecteur);
 app.use('/api/natures', nature);
 app.use('/api/types-besoin', typeBesoin);
 app.use('/api/besoins-site', besoinSite);
+app.use('/api/stats', statsController);
 
 
 // ✅ Middleware pour gérer les erreurs

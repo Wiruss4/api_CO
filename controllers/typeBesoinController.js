@@ -5,12 +5,22 @@ const db = require("../config/db");
 exports.getTypes = async (req, res) => {
   try {
     const { id_nature, id_sous_secteur } = req.query;
-    let query = "SELECT * FROM type_besoin WHERE id_nature = ?";
-    let params = [id_nature];
-    if (id_sous_secteur) {
-      query += " AND id_sous_secteur = ?";
+
+    let query = "SELECT * FROM type_besoin";
+    const params = [];
+
+    // Ajouter des conditions seulement si les paramètres existent
+    if (id_nature && id_sous_secteur) {
+      query += " WHERE id_nature = ? AND id_sous_secteur = ?";
+      params.push(id_nature, id_sous_secteur);
+    } else if (id_nature) {
+      query += " WHERE id_nature = ?";
+      params.push(id_nature);
+    } else if (id_sous_secteur) {
+      query += " WHERE id_sous_secteur = ?";
       params.push(id_sous_secteur);
     }
+
     const [types] = await db.promise().query(query, params);
     res.json(types);
   } catch (error) {
@@ -18,6 +28,7 @@ exports.getTypes = async (req, res) => {
     res.status(500).json({ error: "Erreur récupération types." });
   }
 };
+
 
 
 // Ajouter un type de besoin
