@@ -60,7 +60,8 @@ app.use('/api/sous-secteurs', sousSecteur);
 app.use('/api/natures', nature);
 app.use('/api/types-besoin', typeBesoin);
 app.use('/api/besoins-site', besoinSite);
-app.use('/api/stats', statsController);
+app.use('/api/stats', statsRoutes);
+
 
 
 // ✅ Middleware pour gérer les erreurs
